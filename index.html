@@ -5,7 +5,8 @@
     </head>
     <body>
         <script>
-
+            let winner; //Winner of the round
+                
             //The computer randomly selects 'rock', 'paper', or 'scissors'
             function computerPlay(){
                 const computerChoices = ['Rock', 'Paper', 'Scissors'];
@@ -16,10 +17,9 @@
 
             // Determines who is the winner of the round and prints a message
             function playRound(playerSelection, computerSelection){
-                playerSelection = changeCase(playerSelection);
                 console.log("You chose " + playerSelection);
                 console.log("The computer chose " + computerSelection);
-                let winner;
+                
                 let rock = paper = scissors = false;
                 
                 // Set the values true if player or computer chose rock, paper, or scissors
@@ -57,7 +57,40 @@
                 return playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1);
             }
 
-            console.log(playRound(computerPlay(), computerPlay()));
+            //Starts the game, there are five rounds in a game
+            function game(){
+                //Counts the number of wins each player has
+                let playerWins = 0;
+                let computerWins = 0;
+                let playerSelection;
+
+                for(let i = 1; i < 6; i++){
+
+                    let invalid = true;
+                    while(invalid){
+                        playerSelection = prompt("Round " + i + ":\nRock , Paper, or Scissors?");
+                        playerSelection = changeCase(playerSelection);
+                        if(playerSelection === 'Rock' || 
+                           playerSelection === 'Paper' ||
+                           playerSelection === 'Scissors'){
+                            invalid = false;
+                        }
+                    }
+                    
+                    let msg = playRound(playerSelection, computerPlay());
+                    console.log(msg);
+                    console.log(''); 
+
+                    if(winner === "You") playerWins++;
+                    if(winner === "Computer") computerWins++;
+                }
+
+                if(playerWins > computerWins) alert(`YOU WON THE GAME! Score: ${playerWins} / 5 rounds!`);
+                else if(playerWins == computerWins) alert('It was a tie! Good job!')
+                else alert(`YOU LOSE! Score: ${playerWins} / 5 rounds!`);
+            }
+
+            console.log(game());
 
         </script>
     </body>
