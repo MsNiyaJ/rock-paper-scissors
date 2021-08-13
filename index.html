@@ -15,7 +15,7 @@
                 return computerChoice;
             }
 
-            // Determines who is the winner of the round and prints a message
+            // Determines who is the winner of the round and returns a message
             function playRound(playerSelection, computerSelection){
                 console.log("You chose " + playerSelection);
                 console.log("The computer chose " + computerSelection);
@@ -65,7 +65,7 @@
                 let playerSelection;
 
                 for(let i = 1; i < 6; i++){
-
+                    //Prompts the user until they enter a valid answer
                     let invalid = true;
                     while(invalid){
                         playerSelection = prompt("Round " + i + ":\nRock , Paper, or Scissors?");
@@ -77,6 +77,7 @@
                         }
                     }
                     
+                    // Starts the round then displays who the winner is
                     let msg = playRound(playerSelection, computerPlay());
                     console.log(msg);
                     console.log(''); 
@@ -85,6 +86,7 @@
                     if(winner === "Computer") computerWins++;
                 }
 
+                // Displays who is the winner of the game and how many rounds they won
                 if(playerWins > computerWins) alert(`YOU WON THE GAME! Score: ${playerWins} / 5 rounds!`);
                 else if(playerWins == computerWins) alert('It was a tie! Good job!')
                 else alert(`YOU LOSE! Score: ${playerWins} / 5 rounds!`);
