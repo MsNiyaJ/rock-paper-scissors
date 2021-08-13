@@ -1,0 +1,3 @@
+Play against the computer in a rock paper scissors console game!
+
+GUI Coming soon...
