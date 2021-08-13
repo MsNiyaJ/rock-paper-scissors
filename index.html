@@ -13,6 +13,52 @@
                 let computerChoice = computerChoices[i];
                 return computerChoice;
             }
+
+            // Determines who is the winner of the round and prints a message
+            function playRound(playerSelection, computerSelection){
+                playerSelection = changeCase(playerSelection);
+                console.log("You chose " + playerSelection);
+                console.log("The computer chose " + computerSelection);
+                let winner;
+                let rock = paper = scissors = false;
+                
+                // Set the values true if player or computer chose rock, paper, or scissors
+                if(playerSelection === 'Rock' || computerSelection === 'Rock') 
+                    rock = true; 
+                if(playerSelection === 'Paper' || computerSelection === 'Paper') 
+                    paper = true;
+                if(playerSelection == 'Scissors' || computerSelection === 'Scissors') 
+                    scissors = true;
+                
+                //paper beats rock
+                if(paper && rock){
+                    (playerSelection === 'Paper') ? winner = 'You' : winner = 'Computer';
+                    return (`${winner} Won! Paper beats Rock!`);
+                }
+                //scissors beats paper
+                else if(scissors && paper){
+                    (playerSelection === 'Scissors') ? winner = 'You' : winner = 'Computer';
+                    return (`${winner} Won! Scissors beats Paper!`);
+                }
+                //rock beats scissors
+                else if(rock && scissors){
+                    (playerSelection === 'Rock') ? winner = 'You' :  winner = 'Computer';
+                    return (`${winner} Won! Rock beats Scissors!`);
+                }
+                else if(playerSelection === computerSelection)
+                    return (`It\'s a tie! You both chose ${playerSelection}!`);   
+                else
+                    return ('Something went wrong!');
+            }
+
+            // Makes it so only the first letter of a word is capitalized.
+            function changeCase(playerSelection){
+                playerSelection = playerSelection.toLowerCase();
+                return playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1);
+            }
+
+            console.log(playRound(computerPlay(), computerPlay()));
+
         </script>
     </body>
 </html>
