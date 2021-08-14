@@ -1,3 +1,5 @@
+// Coded by Shaniya Malcolm August 2021
+
 let winner; //Winner of the round
     
 //The computer randomly selects 'rock', 'paper', or 'scissors'
@@ -23,17 +25,17 @@ function playRound(playerSelection, computerSelection){
     if(playerSelection == 'Scissors' || computerSelection === 'Scissors') 
         scissors = true;
     
-    //paper beats rock
+    //If paper and rock were used, paper beats rock
     if(paper && rock){
         (playerSelection === 'Paper') ? winner = 'You' : winner = 'Computer';
         return (`${winner} Won! Paper beats Rock!`);
     }
-    //scissors beats paper
+    //If scissors and paper were used, scissors beats paper
     else if(scissors && paper){
         (playerSelection === 'Scissors') ? winner = 'You' : winner = 'Computer';
         return (`${winner} Won! Scissors beats Paper!`);
     }
-    //rock beats scissors
+    //If rock and scissors were used, rock beats scissors
     else if(rock && scissors){
         (playerSelection === 'Rock') ? winner = 'You' :  winner = 'Computer';
         return (`${winner} Won! Rock beats Scissors!`);
@@ -71,7 +73,7 @@ function game(){
     //Counts the number of wins each player has
     let playerWins = 0;
     let computerWins = 0;
-    
+
     let playerSelection;
 
     for(let i = 1; i < 6; i++){
