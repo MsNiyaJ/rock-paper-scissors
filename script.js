@@ -50,26 +50,33 @@ function changeCase(playerSelection){
     return playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1);
 }
 
+//Prompts the user to enter rock, paper, or scissors until they enter a valid answer  
+function validatePlayerSelection(roundNum){
+    let playerSelection;
+    let invalid = true;
+    while(invalid){
+        playerSelection = prompt("Round " + roundNum + ":\nRock , Paper, or Scissors?");
+        playerSelection = changeCase(playerSelection);
+        if(playerSelection === 'Rock' || 
+            playerSelection === 'Paper' ||
+            playerSelection === 'Scissors'){
+            invalid = false;
+        }
+    }
+    return playerSelection;
+}
+
 //Starts the game, there are five rounds in a game
 function game(){
     //Counts the number of wins each player has
     let playerWins = 0;
     let computerWins = 0;
+    
     let playerSelection;
 
     for(let i = 1; i < 6; i++){
-        //Prompts the user until they enter a valid answer
-        let invalid = true;
-        while(invalid){
-            playerSelection = prompt("Round " + i + ":\nRock , Paper, or Scissors?");
-            playerSelection = changeCase(playerSelection);
-            if(playerSelection === 'Rock' || 
-                playerSelection === 'Paper' ||
-                playerSelection === 'Scissors'){
-                invalid = false;
-            }
-        }
-        
+        playerSelection = validatePlayerSelection(i);
+    
         // Starts the round then displays who the winner is
         let msg = playRound(playerSelection, computerPlay());
         console.log(msg);
