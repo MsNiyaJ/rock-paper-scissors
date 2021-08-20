@@ -111,13 +111,13 @@ window.onload = function() {
     let messages = document.querySelectorAll('.fade-in');
     let messagesDiv = document.querySelector('#greeting-messages');
     messages.forEach(message => {
-        fadeInAndOut(message)
-
-        //removes the messages after 11 seconds
-        setTimeout(function() {
-            messagesDiv.remove();
-        },11000);
+        fadeInAndOut(message);
     });
+    //removes the messages and runs the game after 11 seconds
+    setTimeout(function() {
+        messagesDiv.remove();
+        game();
+    },11000);
 }
 
 function fadeInAndOut(h3){
