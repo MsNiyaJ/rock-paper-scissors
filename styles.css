@@ -1,6 +1,7 @@
 *{
     padding: 0;
-    margin: auto 0;
+    margin: 0;
+    text-align: center;
 }
 
 /* Background colors */
@@ -9,3 +10,35 @@
 .middle-blue-purple{background-color: #7D82B8;}
 .pastel-pink{background-color: #f7a9a8;}
 .ultra-red{background-color: #ef798a;}
+
+/* text colors */
+.white-text{color: white}
+
+/* transitions */
+.fade-in {
+    opacity: 0;
+    transition: opacity 10s ease;
+    -webkit-transition: opacity 10s ease; /* Safari */
+}
+
+.fade-out {
+    opacity: 1;
+    transition: opacity 1s ease-out;
+    -webkit-transition: opacity 1s; /* Safari */
+}
+
+.show{
+    display: inline;
+}
+
+.hide{
+    display: none;
+}
+
+body{
+    background-image: url(images/rps-bg-img.jpg);
+}
+
+#greeting-messages{
+    margin-top: 20px;
+}
