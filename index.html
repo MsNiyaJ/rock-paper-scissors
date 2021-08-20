@@ -6,16 +6,18 @@
         <script src="script.js" defer></script>
     </head>
     <body class="cyber-grape">
-        <h1>Rock Paper Scissors</h1>
+        <h1 class="white-text">Rock Paper Scissors</h1>
         
         <!-- Greeting Text -->
-        <h3>Your friend wants to eat your last gummy bear.</h3>
-        <h3>They challenge you to a game of rock paper scissors.</h3>
-        <h3>Will you win the game to enjoy your delicious treat?</h3>
-        <h3>What will you choose?</h3>
+        <div id="greeting-messages">
+            <h3 class="white-text fade-in">Your friend wants to eat your last gummy bear.</h3>
+            <h3 class="white-text fade-in">They challenge you to a game of rock paper scissors.</h3>
+            <h3 class="white-text fade-in">Will you win the game to enjoy your delicious treat?</h3>
+            <h3 class="white-text fade-in">What will you choose?</h3>
+        </div>
 
         <!-- Players' selections and score -->
-        <div id="rps-selection-div">
+        <div class="white-text hide" id="rps-selection-div">
             <div id="playerSelection">
                 <p>Score: </p>
                 <p>Image goes here</p>
@@ -32,12 +34,12 @@
         </div>
 
         <!-- Rock Paper Scissors buttons -->
-        <div id="buttons-div">
+        <div class="hide" id="buttons-div">
             <button class="choice" id="rock">Rock</button>
             <button class="choice" id="paper">Paper</button>
             <button class="choice" id="scissors">Scissors</button>   
         </div>
 
-        <button id="newGame">New Game</button>
+        <button class="hide" id="newGame">New Game</button>
     </body>
 </html>
