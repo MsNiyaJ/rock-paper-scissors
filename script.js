@@ -110,14 +110,20 @@ function game(){
 window.onload = function() {
     let messages = document.querySelectorAll('.fade-in');
     let messagesDiv = document.querySelector('#greeting-messages');
+    
     messages.forEach(message => {
         fadeInAndOut(message);
     });
+
+    let hiddenElements = document.querySelectorAll('.hide');
+    
     //removes the messages and runs the game after 11 seconds
     setTimeout(function() {
         messagesDiv.remove();
-        game();
+        revealHiddenElements(hiddenElements);
+        // game();
     },11000);
+    
 }
 
 function fadeInAndOut(h3){
@@ -127,5 +133,12 @@ function fadeInAndOut(h3){
         h3.classList.remove('fade-in');
         h3.classList.add('fade-out');
         h3.style.opacity='0'; //fade the text out of the window
+    });
+}
+
+function revealHiddenElements(hiddenElements){
+    hiddenElements.forEach(hiddenElement => {
+        hiddenElement.classList.remove('hide');
+        hiddenElement.classList.add('show');
     });
 }

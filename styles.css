@@ -28,11 +28,11 @@
 }
 
 .show{
-    display: inline;
+    visibility: visible;
 }
 
 .hide{
-    display: none;
+    visibility: hidden;
 }
 
 body{
