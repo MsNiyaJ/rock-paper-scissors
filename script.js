@@ -108,27 +108,28 @@ function game(){
 // });
 
 window.onload = function() {
-    let messages = document.querySelectorAll('.fade-in');
-    let messagesDiv = document.querySelector('#greeting-messages');
+    displayMessages();
     
+    //After 11 seconds, remove messages, reveal all other elements, and start the game
+    setTimeout(function() {
+        const messagesDiv = document.querySelector('#greeting-messages');
+        messagesDiv.remove();
+        revealHiddenElements();
+        // game();
+    },11000);
+}
+
+function displayMessages(){
+    const messages = document.querySelectorAll('.fade-in');
     messages.forEach(message => {
         fadeInAndOut(message);
     });
-
-    let hiddenElements = document.querySelectorAll('.hide');
-    
-    //removes the messages and runs the game after 11 seconds
-    setTimeout(function() {
-        messagesDiv.remove();
-        revealHiddenElements(hiddenElements);
-        // game();
-    },11000);
-    
 }
 
 function fadeInAndOut(h3){
     h3.style.opacity='1';    //fade the text into the window
 
+    //When the fade in transition ends, begin the fade out transition
     h3.addEventListener('transitionend', () => {
         h3.classList.remove('fade-in');
         h3.classList.add('fade-out');
@@ -136,7 +137,8 @@ function fadeInAndOut(h3){
     });
 }
 
-function revealHiddenElements(hiddenElements){
+function revealHiddenElements(){
+    const hiddenElements = document.querySelectorAll('.hide');
     hiddenElements.forEach(hiddenElement => {
         hiddenElement.classList.remove('hide');
         hiddenElement.classList.add('show');
