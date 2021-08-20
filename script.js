@@ -94,19 +94,6 @@ function game(){
     else alert(`YOU LOSE! Score: ${playerWins} / 5 rounds!`);
 }
 
-// console.log(game());
-
-// const choices = document.querySelectorAll('.choice');
-
-// //for each button add a 'click' listener that will play a round
-// choices.forEach((choice) => {
-//     choice.addEventListener('click', () => {
-//         // console.log(choice.id);
-//         // play a round
-//         // if a players score is 5 end the game
-//     });
-// });
-
 window.onload = function() {
     displayMessages();
     
@@ -140,7 +127,11 @@ function fadeInAndOut(h3){
 function revealHiddenElements(){
     const hiddenElements = document.querySelectorAll('.hide');
     hiddenElements.forEach(hiddenElement => {
-        hiddenElement.classList.remove('hide');
-        hiddenElement.classList.add('show');
+
+        //Reveal all elements except the new game button
+        if(hiddenElement.id !== 'newGame'){
+            hiddenElement.classList.remove('hide');
+            hiddenElement.classList.add('show');
+        }
     });
 }

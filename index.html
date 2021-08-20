@@ -5,13 +5,13 @@
         <link rel="stylesheet" href="styles.css">
         <script src="script.js" defer></script>
     </head>
-    <body class="cyber-grape">
+    <body class="black">
         <h1 class="white-text hide">Rock Paper Scissors</h1>
         
         <!-- Greeting Text -->
         <div id="greeting-messages">
-            <h3 class="white-text fade-in">You and your friend want to eat the last gummy bear.</h3>
-            <h3 class="white-text fade-in">They challenge you to a game of rock paper scissors.</h3>
+            <h3 class="white-text fade-in">You and your friend Tim want to eat the last gummy bear.</h3>
+            <h3 class="white-text fade-in">He challenges you to a game of rock paper scissors.</h3>
             <h3 class="white-text fade-in">Will you win the game to enjoy your delicious treat?</h3>
             <h3 class="white-text fade-in">What will you choose?</h3>
         </div>
@@ -19,27 +19,38 @@
         <!-- Players' selections and score -->
         <div class="white-text hide" id="rps-selection-div">
             <div id="playerSelection">
-                <p>Score: </p>
-                <p>Image goes here</p>
-                <p>You</p>
+                <p>Score: 0</p>
+                <!-- <p>Image goes here</p> -->
+                <p class='shadow-text'>You</p>
             </div>
             <div id="vs-div">
                 <p>vs.</p>
             </div>
             <div id="computerSelection">
-                <p>Score: </p>
-                <p>Image goes here</p>
-                <p>Computer</p>
+                <p>Score: 0</p>
+                <!-- <p>Image goes here</p> -->
+                <p class='shadow-text'>Tim</p>
             </div>
         </div>
 
         <!-- Rock Paper Scissors buttons -->
         <div class="hide" id="buttons-div">
-            <button class="choice" id="rock">Rock</button>
-            <button class="choice" id="paper">Paper</button>
-            <button class="choice" id="scissors">Scissors</button>   
+            <button class="choice-btn middle-blue-purple" id="rock">
+                <img draggable="false" alt="rock" 
+                src="images/rock-symbol.png">
+            </button>
+            <button class="choice-btn middle-blue-purple" id="paper">
+                <img draggable="false" alt="paper" 
+                src="images/paper-symbol.png">
+            </button>
+            <button class="choice-btn middle-blue-purple" id="scissors">
+                <img draggable="false" alt="scissors" 
+                src="images/scissor-symbol.png">
+            </button>   
         </div>
 
-        <button class="hide" id="newGame">New Game</button>
+        <button class="white middle-blue-purple-text hide" 
+            id="newGame"> NEW GAME
+        </button>
     </body>
 </html>
