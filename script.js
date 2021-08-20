@@ -94,38 +94,44 @@ function game(){
     else alert(`YOU LOSE! Score: ${playerWins} / 5 rounds!`);
 }
 
-// console.log(game());
-
-// const choices = document.querySelectorAll('.choice');
-
-// //for each button add a 'click' listener that will play a round
-// choices.forEach((choice) => {
-//     choice.addEventListener('click', () => {
-//         // console.log(choice.id);
-//         // play a round
-//         // if a players score is 5 end the game
-//     });
-// });
-
 window.onload = function() {
-    let messages = document.querySelectorAll('.fade-in');
-    let messagesDiv = document.querySelector('#greeting-messages');
+    displayMessages();
+    
+    //After 11 seconds, remove messages, reveal all other elements, and start the game
+    setTimeout(function() {
+        const messagesDiv = document.querySelector('#greeting-messages');
+        messagesDiv.remove();
+        revealHiddenElements();
+        // game();
+    },11000);
+}
+
+function displayMessages(){
+    const messages = document.querySelectorAll('.fade-in');
     messages.forEach(message => {
         fadeInAndOut(message);
     });
-    //removes the messages and runs the game after 11 seconds
-    setTimeout(function() {
-        messagesDiv.remove();
-        game();
-    },11000);
 }
 
 function fadeInAndOut(h3){
     h3.style.opacity='1';    //fade the text into the window
 
+    //When the fade in transition ends, begin the fade out transition
     h3.addEventListener('transitionend', () => {
         h3.classList.remove('fade-in');
         h3.classList.add('fade-out');
         h3.style.opacity='0'; //fade the text out of the window
+    });
+}
+
+function revealHiddenElements(){
+    const hiddenElements = document.querySelectorAll('.hide');
+    hiddenElements.forEach(hiddenElement => {
+
+        //Reveal all elements except the new game button
+        if(hiddenElement.id !== 'newGame'){
+            hiddenElement.classList.remove('hide');
+            hiddenElement.classList.add('show');
+        }
     });
 }
