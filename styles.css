@@ -24,6 +24,11 @@
     text-shadow: #000 2px 2px;
 }
 
+.fancy-text{
+    font-family: cursive;
+    text-shadow: #000 2px 2px;
+}
+
 /* transitions */
 .fade-in {
     opacity: 0;

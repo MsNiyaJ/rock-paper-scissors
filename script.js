@@ -99,8 +99,7 @@ window.onload = function() {
     
     //After 11 seconds, remove messages, reveal all other elements, and start the game
     setTimeout(function() {
-        const messagesDiv = document.querySelector('#greeting-messages');
-        messagesDiv.remove();
+        removeMessages();
         revealHiddenElements();
         // game();
     },11000);
@@ -110,6 +109,13 @@ function displayMessages(){
     const messages = document.querySelectorAll('.fade-in');
     messages.forEach(message => {
         fadeInAndOut(message);
+    });
+}
+
+function removeMessages(){
+    const messages = document.querySelectorAll('.fade-out');
+    messages.forEach(message => {
+        message.remove();
     });
 }
 
