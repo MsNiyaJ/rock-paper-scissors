@@ -1,20 +1,13 @@
-// Coded by Shaniya Malcolm August 2021
+//Declare initial scores for each player
+let playerScore = 0;
+let computerScore = 0;
 
-let winner; //Winner of the round
-    
-//The computer randomly selects 'rock', 'paper', or 'scissors'
-function computerPlay(){
-    const computerChoices = ['Rock', 'Paper', 'Scissors'];
-    let i = Math.floor(Math.random() * 3);
-    let computerChoice = computerChoices[i];
-    return computerChoice;
-}
-
-// Determines who is the winner of the round and returns a message
+// Determines the winner of the round, displays a message, 
+// increases their score, and checks if the game is over
 function playRound(playerSelection, computerSelection){
-    console.log("You chose " + playerSelection);
-    console.log("The computer chose " + computerSelection);
-    
+    let message;
+    let gameMsg = document.querySelector('#game-msg');
+
     let rock = paper = scissors = false;
     
     // Set the values true if player or computer chose rock, paper, or scissors
@@ -27,111 +20,108 @@ function playRound(playerSelection, computerSelection){
     
     //If paper and rock were used, paper beats rock
     if(paper && rock){
-        (playerSelection === 'Paper') ? winner = 'You' : winner = 'Computer';
-        return (`${winner} Won! Paper beats Rock!`);
+        if(playerSelection === 'Paper'){
+            playerScore += 1;
+            message = 'You win! Paper beats rock!';
+        }
+        else{
+            computerScore += 1;
+            message = 'You lose! Paper beats rock!';
+        }
     }
     //If scissors and paper were used, scissors beats paper
     else if(scissors && paper){
-        (playerSelection === 'Scissors') ? winner = 'You' : winner = 'Computer';
-        return (`${winner} Won! Scissors beats Paper!`);
+        if(playerSelection === 'Scissors') {
+            playerScore += 1;
+            message = 'You win! Scissors beats paper!';
+        }
+        else{
+            computerScore += 1;
+            message = 'You lose! Scissors beats paper!'
+        }
     }
     //If rock and scissors were used, rock beats scissors
     else if(rock && scissors){
-        (playerSelection === 'Rock') ? winner = 'You' :  winner = 'Computer';
-        return (`${winner} Won! Rock beats Scissors!`);
+        if(playerSelection === 'Rock') {
+            playerScore += 1;
+            message = 'You win! Rock beats scissors!';
+        }
+        else{
+            computerScore += 1;
+            message = 'You lose! Rock beats scissors!!'
+        }
     }
-    else if(playerSelection === computerSelection)
-        return (`It\'s a tie! You both chose ${playerSelection}!`);   
     else
-        return ('Something went wrong!');
+        message = "It's a tie! No points added."
+
+    gameMsg.textContent = message;
+    updateScoreBoard();
+    checkForFiveWins();
 }
 
-// Makes it so only the first letter of a word is capitalized.
-function changeCase(playerSelection){
-    playerSelection = playerSelection.toLowerCase();
-    return playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1);
-}
+function endGame(winner){
+    //disable all rock, paper, scissor buttons
+    const gameButtons = document.querySelectorAll('.choice-btn');
+    
+    gameButtons.forEach(button => {
+        button.disabled = true;
+    });
 
-//Prompts the user to enter rock, paper, or scissors until they enter a valid answer  
-function validatePlayerSelection(roundNum){
-    let playerSelection;
-    let invalid = true;
-    while(invalid){
-        playerSelection = prompt("Round " + roundNum + ":\nRock , Paper, or Scissors?");
-        playerSelection = changeCase(playerSelection);
-        if(playerSelection === 'Rock' || 
-            playerSelection === 'Paper' ||
-            playerSelection === 'Scissors'){
-            invalid = false;
-        }
+    let gameMsg = document.querySelector('#game-msg');
+
+    //Display a message
+    if(winner === 'You'){
+        gameMsg.textContent = 'You enjoy the last gummy bear in triumph. You are the champion!';
+    }else{
+        gameMsg.textContent = 'Defeated, you watch Tim happily enjoy the last gummy bear as tears roll down your face.';
     }
-    return playerSelection;
+
+    //Reveal the new game button
+    const newGameBtn = document.querySelector('#newGameBtn');
+    newGameBtn.classList.toggle('hide');
 }
 
-//Starts the game, there are five rounds in a game
+//Ends the game when a player reaches 5 points
+function checkForFiveWins(){
+    if(playerScore === 5)
+        endGame('You');
+    else if(computerScore === 5)
+        endGame('Tim');
+}
+
+//Update the text in the window
+function updateScoreBoard(){
+    const pScore = document.querySelector('.playerScore');
+    pScore.textContent = `Score: ${playerScore}`;
+
+    const cScore = document.querySelector('.computerScore');
+    cScore.textContent = `Score: ${computerScore}`;
+}
+
+//The computer randomly selects 'rock', 'paper', or 'scissors'
+function computerPlay(){
+    const computerChoices = ['Rock', 'Paper', 'Scissors'];
+    let i = Math.floor(Math.random() * 3);      //randomly chooses a number between 0 and 2
+    let computerChoice = computerChoices[i];
+    return computerChoice;
+}
+
+//When a button is clicked, play a round
 function game(){
-    //Counts the number of wins each player has
-    let playerWins = 0;
-    let computerWins = 0;
+    document.getElementById("Rock").onclick = function(){
+        playRound("Rock", computerPlay());
+    };
+    document.getElementById("Paper").onclick = function(){
+        playRound("Paper", computerPlay());
+    };
+    document.getElementById("Scissors").onclick = function(){
+        playRound("Scissors", computerPlay());
+    }; 
 
-    let playerSelection;
-
-    for(let i = 1; i < 6; i++){
-        playerSelection = validatePlayerSelection(i);
-    
-        // Starts the round then displays who the winner is
-        let msg = playRound(playerSelection, computerPlay());
-        console.log(msg);
-        console.log(''); 
-
-        if(winner === "You") playerWins++;
-        if(winner === "Computer") computerWins++;
-    }
-
-    // Displays who is the winner of the game and how many rounds they won
-    if(playerWins > computerWins) alert(`YOU WON THE GAME! Score: ${playerWins} / 5 rounds!`);
-    else if(playerWins == computerWins) alert('It was a tie! Good job!')
-    else alert(`YOU LOSE! Score: ${playerWins} / 5 rounds!`);
+    //Reloads the page when a user clicks on the new game button
+    document.getElementById("newGameBtn").onclick = function(){
+        location.reload();
+    }; 
 }
 
-window.onload = function() {
-    displayMessages();
-    
-    //After 11 seconds, remove messages, reveal all other elements, and start the game
-    setTimeout(function() {
-        const messagesDiv = document.querySelector('#greeting-messages');
-        messagesDiv.remove();
-        revealHiddenElements();
-        // game();
-    },11000);
-}
-
-function displayMessages(){
-    const messages = document.querySelectorAll('.fade-in');
-    messages.forEach(message => {
-        fadeInAndOut(message);
-    });
-}
-
-function fadeInAndOut(h3){
-    h3.style.opacity='1';    //fade the text into the window
-
-    //When the fade in transition ends, begin the fade out transition
-    h3.addEventListener('transitionend', () => {
-        h3.classList.remove('fade-in');
-        h3.classList.add('fade-out');
-        h3.style.opacity='0'; //fade the text out of the window
-    });
-}
-
-function revealHiddenElements(){
-    const hiddenElements = document.querySelectorAll('.hide');
-    hiddenElements.forEach(hiddenElement => {
-
-        //Reveal all elements except the new game button
-        if(hiddenElement.id !== 'newGame'){
-            hiddenElement.classList.remove('hide');
-            hiddenElement.classList.add('show');
-        }
-    });
-}
+game(); //Starts the game
