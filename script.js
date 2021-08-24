@@ -1,22 +1,13 @@
-// Coded by Shaniya Malcolm August 2021
-
-//Counts the score each player has
+//Declare initial scores for each player
 let playerScore = 0;
 let computerScore = 0;
-    
-//The computer randomly selects 'rock', 'paper', or 'scissors'
-function computerPlay(){
-    const computerChoices = ['Rock', 'Paper', 'Scissors'];
-    let i = Math.floor(Math.random() * 3);
-    let computerChoice = computerChoices[i];
-    return computerChoice;
-}
 
-// Determines who is the winner of the round and increases their score
+// Determines the winner of the round, displays a message, 
+// increases their score, and checks if the game is over
 function playRound(playerSelection, computerSelection){
-    console.log("You chose " + playerSelection);
-    console.log("The computer chose " + computerSelection);
-    
+    let message;
+    let gameMsg = document.querySelector('#game-msg');
+
     let rock = paper = scissors = false;
     
     // Set the values true if player or computer chose rock, paper, or scissors
@@ -29,89 +20,108 @@ function playRound(playerSelection, computerSelection){
     
     //If paper and rock were used, paper beats rock
     if(paper && rock){
-        (playerSelection === 'Paper') ? playerScore += 1 : computerScore += 1;
-        updateScore();
+        if(playerSelection === 'Paper'){
+            playerScore += 1;
+            message = 'You win! Paper beats rock!';
+        }
+        else{
+            computerScore += 1;
+            message = 'You lose! Paper beats rock!';
+        }
     }
     //If scissors and paper were used, scissors beats paper
     else if(scissors && paper){
-        (playerSelection === 'Scissors') ? playerScore += 1 : computerScore += 1;
-        updateScore();
+        if(playerSelection === 'Scissors') {
+            playerScore += 1;
+            message = 'You win! Scissors beats paper!';
+        }
+        else{
+            computerScore += 1;
+            message = 'You lose! Scissors beats paper!'
+        }
     }
     //If rock and scissors were used, rock beats scissors
     else if(rock && scissors){
-        (playerSelection === 'Rock') ? playerScore += 1 : computerScore += 1;
-        updateScore();
+        if(playerSelection === 'Rock') {
+            playerScore += 1;
+            message = 'You win! Rock beats scissors!';
+        }
+        else{
+            computerScore += 1;
+            message = 'You lose! Rock beats scissors!!'
+        }
     }
     else
-        return;
+        message = "It's a tie! No points added."
+
+    gameMsg.textContent = message;
+    updateScoreBoard();
+    checkForFiveWins();
 }
 
-//Changes the text content of both scores
-function updateScore(){
-    let pScore = document.querySelector('.playerScore');
-    let cScore = document.querySelector('.computerScore');
+function endGame(winner){
+    //disable all rock, paper, scissor buttons
+    const gameButtons = document.querySelectorAll('.choice-btn');
+    
+    gameButtons.forEach(button => {
+        button.disabled = true;
+    });
+
+    let gameMsg = document.querySelector('#game-msg');
+
+    //Display a message
+    if(winner === 'You'){
+        gameMsg.textContent = 'You enjoy the last gummy bear in triumph. You are the champion!';
+    }else{
+        gameMsg.textContent = 'Defeated, you watch Tim happily enjoy the last gummy bear as tears roll down your face.';
+    }
+
+    //Reveal the new game button
+    const newGameBtn = document.querySelector('#newGameBtn');
+    newGameBtn.classList.toggle('hide');
+}
+
+//Ends the game when a player reaches 5 points
+function checkForFiveWins(){
+    if(playerScore === 5)
+        endGame('You');
+    else if(computerScore === 5)
+        endGame('Tim');
+}
+
+//Update the text in the window
+function updateScoreBoard(){
+    const pScore = document.querySelector('.playerScore');
     pScore.textContent = `Score: ${playerScore}`;
+
+    const cScore = document.querySelector('.computerScore');
     cScore.textContent = `Score: ${computerScore}`;
 }
 
+//The computer randomly selects 'rock', 'paper', or 'scissors'
+function computerPlay(){
+    const computerChoices = ['Rock', 'Paper', 'Scissors'];
+    let i = Math.floor(Math.random() * 3);      //randomly chooses a number between 0 and 2
+    let computerChoice = computerChoices[i];
+    return computerChoice;
+}
+
+//When a button is clicked, play a round
 function game(){
-    document.getElementById("Rock").onclick = function() {
+    document.getElementById("Rock").onclick = function(){
         playRound("Rock", computerPlay());
     };
-    document.getElementById("Paper").onclick = function() {
+    document.getElementById("Paper").onclick = function(){
         playRound("Paper", computerPlay());
     };
-    document.getElementById("Scissors").onclick = function() {
+    document.getElementById("Scissors").onclick = function(){
         playRound("Scissors", computerPlay());
-    };
+    }; 
+
+    //Reloads the page when a user clicks on the new game button
+    document.getElementById("newGameBtn").onclick = function(){
+        location.reload();
+    }; 
 }
 
-//This function runs whenever the window is loaded
-window.onload = function() {
-    displayMessages();
-    
-    //After 11 seconds, remove messages, reveal elements, and start the game
-    setTimeout(function() {
-        removeMessages();
-        revealHiddenElements();
-        game();
-    },11000);
-}
-
-function displayMessages(){
-    const messages = document.querySelectorAll('.fade-in');
-    messages.forEach(message => {
-        fadeInAndOut(message);
-    });
-}
-
-function removeMessages(){
-    const messages = document.querySelectorAll('.fade-out');
-    messages.forEach(message => {
-        message.remove();
-    });
-}
-
-function fadeInAndOut(h3){
-    h3.style.opacity='1';    //fade the text into the window
-
-    //When the fade in transition ends, begin the fade out transition
-    h3.addEventListener('transitionend', () => {
-        h3.classList.remove('fade-in');
-        h3.classList.add('fade-out');
-        h3.style.opacity='0'; //fade the text out of the window
-    });
-}
-
-//All elements that were hidden are now visible
-function revealHiddenElements(){
-    const hiddenElements = document.querySelectorAll('.hide');
-    hiddenElements.forEach(hiddenElement => {
-
-        //Reveal all elements except the new game button
-        if(hiddenElement.id !== 'newGame'){
-            hiddenElement.classList.remove('hide');
-            hiddenElement.classList.add('show');
-        }
-    });
-}
+game(); //Starts the game

@@ -2,44 +2,16 @@
     padding: 0;
     margin: 0;
     text-align: center;
-    font-family: Garamond, serif;
 }
 
-/* Background colors */
-.white{background-color: white;}
-.black{background-color: #000;}
-.queen-pink{background-color: #e5c3d1;}
-.cyber-grape{background-color: #613F75;}
-.middle-blue-purple{background-color: #7D82B8;}
-.pastel-pink{background-color: #f7a9a8;}
-.ultra-red{background-color: #ef798a;}
-
-/* text colors */
-.white-text{color: white}
-.middle-blue-purple-text{color: #7D82B8;}
-
 .shadow-text{
-    font-size: 50px;
+    font-size: 4vw;
     color: #7D82B8;
-    text-shadow: #000 2px 2px;
+    text-shadow: #fff 1px 2px;
 }
 
 .fancy-text{
     font-family: cursive;
-    text-shadow: #000 2px 2px;
-}
-
-/* transitions */
-.fade-in {
-    opacity: 0;
-    transition: opacity 10s ease;
-    -webkit-transition: opacity 10s ease; /* Safari */
-}
-
-.fade-out {
-    opacity: 1;
-    transition: opacity 1s ease-out;
-    -webkit-transition: opacity 1s; /* Safari */
 }
 
 .show{
@@ -51,39 +23,54 @@
 }
 
 body{
-    background-image: url(images/rps-bg-img.jpg);
+    background-image: 
+      linear-gradient(
+        rgba(0, 0, 0, 0.5),
+        rgba(0, 0, 0, 0.5)
+      ), 
+      url(images/rps-bg-img.jpg);
     background-size: cover;
     background-repeat: no-repeat;
-    height: 100%;
+    background-position-x: center;
+    height: 100vh;
+    background-color: #000;
 }
 
 h1{
-    font-size: 50px;
+    margin-top: 40px;
+    color: #7D82B8;
+    font-size: 80px;
+    text-shadow: white 1px 1px;
 }
 
 h3{
+    color: white;
     font-size: 20px;
 }
 
 #greeting-messages{
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 #rps-selection-div{
+    color: white;
     display: flex;
     justify-content: space-evenly;
     align-items:flex-end;
-    /* border: khaki 5px solid; */
-    margin-top: 150px;
-    margin-left: 20%;
-    margin-right: 20%;
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50vw;
     height: 100px;
 }
 
-#vs-div {
-    font-size: 50px;
-    color: #7D82B8;
-    text-shadow: #000 2px 2px;
+#vs-div{
+    height: 50px;
+}
+
+#vs-div p{
+    font-size: 3vw;
+    color: #fff;
 }
 
 #computerSelection, #playerSelection{
@@ -104,15 +91,72 @@ h3{
 }
 
 .choice-btn{
+    background-color: #7D82B8;
     opacity: 0.8;
 }
 .choice-btn img{
     width: 60px;
 }
 
-#newGame{
+#game-updates{
+    width: 500px;
+    background-color: white;
+    margin: 40px auto;
+    text-align: center;
+    padding: 40px 0;
+    border-radius: 20px;
+    opacity: 0.8;
+}
+
+#game-msg{
+    color: #7D82B8;
+    font-size: 20px;
+}
+
+#newGameBtn{
+    color: #7D82B8;
+    background-color: white;
     margin-top: 20px;
     height: 40px;
     width: 80px;
     border-radius: 3px;
+}
+
+#newGameBtn:active{
+    background-color: #7D82B8;
+    color: white;
+}
+
+/* Transitions */
+.fade-in-text {     /* Source: https://blog.hubspot.com/website/css-fade-in */
+    animation: fadeIn linear 7s;
+    -webkit-animation: fadeIn linear 7s;
+    -moz-animation: fadeIn linear 7s;
+    -o-animation: fadeIn linear 7s;
+    -ms-animation: fadeIn linear 7s;
+}
+
+@keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+}
+
+@-moz-keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+}
+
+@-webkit-keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+}
+
+@-o-keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+}
+
+@-ms-keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
 }

@@ -6,18 +6,15 @@
         <script src="script.js" defer></script>
     </head>
     <body class="black">
-        <h1 class="white-text hide">Rock Paper Scissors</h1>
+        <h1>Rock Paper Scissors</h1>
         
-        <!-- Greeting Text -->
-        <div id="greeting-messages">
-            <h3 class="white-text fade-in">You and your friend Tim want to eat the last gummy bear.</h3>
-            <h3 class="white-text fade-in">He challenges you to a game of rock paper scissors.</h3>
-            <h3 class="white-text fade-in">Will you win the game to enjoy your delicious treat?</h3>
-            <h3 class="white-text fade-in">What will you choose?</h3>
+        <!-- Messages -->
+        <div id="greeting-messages" class="fade-in-text">
+            <h3>Defeat Tim in Rock Paper Scissors for the last gummy bear in the bag!<br>First to Five:</h3>
         </div>
 
         <!-- Players' selections and score -->
-        <div class="white-text hide" id="rps-selection-div">
+        <div id="rps-selection-div">
             <div id="playerSelection">
                 <p class="playerScore fancy-text">Score: 0</p>
                 <p class='shadow-text'>You</p>
@@ -32,23 +29,25 @@
         </div>
 
         <!-- Rock Paper Scissors buttons -->
-        <div class="hide" id="buttons-div">
-            <button class="choice-btn middle-blue-purple" id="Rock">
+        <div id="buttons-div">
+            <button class="choice-btn" id="Rock">
                 <img draggable="false" alt="rock" 
                 src="images/rock-symbol.png">
             </button>
-            <button class="choice-btn middle-blue-purple" id="Paper">
+            <button class="choice-btn" id="Paper">
                 <img draggable="false" alt="paper" 
                 src="images/paper-symbol.png">
             </button>
-            <button class="choice-btn middle-blue-purple" id="Scissors">
+            <button class="choice-btn" id="Scissors">
                 <img draggable="false" alt="scissors" 
                 src="images/scissor-symbol.png">
             </button>   
         </div>
 
-        <button class="white middle-blue-purple-text hide" 
-            id="newGame"> NEW GAME
-        </button>
+        <div id="game-updates">
+            <p id="game-msg"></p>
+        </div>
+
+        <button id="newGameBtn" class="hide"> NEW GAME </button>
     </body>
 </html>
